@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+</head>
+<body>
+
+<script>
+  // Function to add two numbers
+  function add(x, y) {
+    return x + y;
+  }
+
+  // Function to subtract two numbers
+  function subtract(x, y) {
+    return x - y;
+  }
+
+  // Function to multiply two numbers
+  function multiply(x, y) {
+    return x * y;
+  }
+
+  // Function to divide two numbers
+  function divide(x, y) {
+    if (y === 0) {
+      return "Cannot divide by zero!";
+    }
+    return x / y;
+  }
+
+  // Function to get user input for numbers and operation
+  function getUserInput() {
+    const num1 = parseFloat(prompt("Enter the first number:"));
+
+    if (isNaN(num1)) {
+      alert("Invalid input. Please enter a valid number.");
+      return getUserInput();
+    }
+
+    const operation = prompt("Enter the operation (+, -, *, /):");
+
+    if (!['+', '-', '*', '/'].includes(operation)) {
+      alert("Invalid operation. Please enter a valid operation.");
+      return getUserInput();
+    }
+
+    const num2 = parseFloat(prompt("Enter the second number:"));
+
+    if (isNaN(num2)) {
+      alert("Invalid input. Please enter a valid number.");
+      return getUserInput();
+    }
+
+    return { num1, operation, num2 };
+  }
+
+  // Main calculator loop
+  while (true) {
+    // Get user input
+    const userInput = getUserInput();
+
+    // Perform the calculation based on the chosen operation
+    let result;
+    switch (userInput.operation) {
+      case '+':
+        result = add(userInput.num1, userInput.num2);
+        break;
+      case '-':
+        result = subtract(userInput.num1, userInput.num2);
+        break;
+      case '*':
+        result = multiply(userInput.num1, userInput.num2);
+        break;
+      case '/':
+        result = divide(userInput.num1, userInput.num2);
+        break;
+    }
+
+    // Display the result using alert
+    alert(`${userInput.num1} ${userInput.operation} ${userInput.num2} = ${result}`);
+
+    // Ask the user if they want to perform another calculation
+    const continueCalculation = confirm("Do you want to perform another calculation?");
+    if (!continueCalculation) {
+      break;
+    }
+  }
+</script>
+
+</body>
+</html>
